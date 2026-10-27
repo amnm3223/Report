@@ -85,7 +85,8 @@
                 class="bg-rose-100 hover:bg-rose-200 text-rose-800 border-2 border-rose-300 font-bold px-5 py-3 rounded-2xl flex items-center gap-3 shadow-sm active:scale-95 transition">
                 <i class="fa-solid fa-microphone text-rose-600 text-2xl"></i>
                 <div class="text-left">
-                    <div class="text-sm font-bold" id="mic-perm-status-text">🎤 さいしょに マイクを つかう じゅんび</div>
+                    <div class="text-sm font-bold" id="mic-perm-status-text">🎤 さいしょに マイクを つかう じゅんび（きょか）</div>
+                    <div class="text-xs text-rose-600">（おしゃべり にゅうりょくを つかうひとは おしてね）</div>
                 </div>
             </button>
 
@@ -374,6 +375,10 @@
                         <span>じどうの ふりかえり いちらん（せんせいよう）</span>
                     </h2>
                     <div class="flex gap-2 flex-wrap">
+                        <!-- GAS WebApp URL設定ボタン -->
+                        <button onclick="openGasUrlModal()" class="text-xs bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold px-3 py-1.5 rounded-full flex items-center gap-1 shadow">
+                            <i class="fa-solid fa-link"></i> スプシ連携設定
+                        </button>
                         <button onclick="copyForSpreadsheet()" class="text-xs bg-teal-600 hover:bg-teal-500 px-3 py-1.5 rounded-full font-bold flex items-center gap-1 text-white shadow">
                             <i class="fa-solid fa-file-excel"></i> スプレッドシート用にコピー
                         </button>
@@ -385,11 +390,7 @@
                         </button>
                     </div>
                 </div>
-                <p class="text-xs text-slate-300">クラスぜんいんの ていしゅつした ふりかえりを きょうかごとに しぼりこんで かくにんできます。「スプレッドシート用にコピー」を押してGoogleスプレッドシートに直接貼り付け（Ctrl+V）できます。</p>
-                
-                <!-- きょうかフィルタータブ -->
-                <div class="flex gap-1.5 overflow-x-auto pb-1 text-xs md:text-sm">
-                    <button onclick="filterTeacherSubject('all')" id="t-tab-all" class="px-3 py-1.5 rounded-xl font-bold bg-emerald-500 text-white whitespace-nowrap">すべて</button>
+                <p class="text-xs text-slate-300">クラスぜんいんの ていしゅつした ふりかえりを きょうかごとに しぼりこんで かくにんできます。「スプシ連携設定」からGASのURLを登録するとリアルタイムで自動送信されます。</p>
                     <button onclick="filterTeacherSubject('こくご')" id="t-tab-こくご" class="px-3 py-1.5 rounded-xl font-bold bg-slate-700 text-slate-300 whitespace-nowrap">こくご</button>
                     <button onclick="filterTeacherSubject('さんすう')" id="t-tab-さんすう" class="px-3 py-1.5 rounded-xl font-bold bg-slate-700 text-slate-300 whitespace-nowrap">さんすう</button>
                     <button onclick="filterTeacherSubject('せいかつ')" id="t-tab-せいかつ" class="px-3 py-1.5 rounded-xl font-bold bg-slate-700 text-slate-300 whitespace-nowrap">せいかつ</button>
@@ -416,6 +417,22 @@
             <div class="flex gap-2">
                 <button onclick="closeTeacherAuthModal()" class="flex-1 bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl">キャンセル</button>
                 <button onclick="verifyTeacherPass()" class="flex-1 bg-slate-800 text-white font-bold py-2.5 rounded-xl">ログイン</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- スプレッドシート(GAS) URL設定モーダル -->
+    <div id="gas-url-modal" class="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-white rounded-3xl p-6 max-w-md w-full text-center shadow-xl border-4 border-amber-400">
+            <div class="text-4xl mb-2">📊</div>
+            <h3 class="text-lg font-bold text-slate-800 mb-1">スプレッドシート連携設定</h3>
+            <p class="text-xs text-slate-500 mb-4 text-left leading-relaxed">
+                Googleスプレッドシートの「拡張機能 ➔ Apps Script」でデプロイした**ウェブアプリURL**を入力してください。送信ボタンを押した時に自動で送信されるようになります。
+            </p>
+            <input type="text" id="gas-url-input" class="w-full p-3 rounded-xl border-2 border-slate-300 text-xs font-mono mb-4 focus:outline-none focus:border-amber-500" placeholder="https://script.google.com/macros/s/.../exec">
+            <div class="flex gap-2">
+                <button onclick="closeGasUrlModal()" class="flex-1 bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-sm">キャンセル</button>
+                <button onclick="saveGasUrl()" class="flex-1 bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-2.5 rounded-xl text-sm">ほぞんする</button>
             </div>
         </div>
     </div>
@@ -466,7 +483,7 @@
         let activeStudentFilter = 'all';
         let selectedCardForStamp = null;
         let isMicApproved = false;
-
+        let gasWebAppUrl = localStorage.getItem('gas_webapp_url') || '';
         // 50音表の文字配列（あいうえお順に5列でぴったり揃うマス目配置）
         const aiueoChars = [
             'あ','い','う','え','お',
@@ -871,6 +888,24 @@
             document.getElementById('teacher-auth-modal').classList.remove('hidden');
         }
 
+        // GAS URL設定モーダル関連
+        function openGasUrlModal() {
+            document.getElementById('gas-url-input').value = gasWebAppUrl;
+            document.getElementById('gas-url-modal').classList.remove('hidden');
+        }
+
+        function closeGasUrlModal() {
+            document.getElementById('gas-url-modal').classList.add('hidden');
+        }
+
+        function saveGasUrl() {
+            const url = document.getElementById('gas-url-input').value.trim();
+            gasWebAppUrl = url;
+            localStorage.setItem('gas_webapp_url', url);
+            closeGasUrlModal();
+            showModal('✅', 'スプレッドシート連携URLを ほぞんしました！');
+        }
+
         function closeTeacherAuthModal() {
             document.getElementById('teacher-auth-modal').classList.add('hidden');
         }
@@ -1041,6 +1076,20 @@
             const cards = JSON.parse(localStorage.getItem('furikaeri_cards') || '[]');
             cards.unshift(card);
             localStorage.setItem('furikaeri_cards', JSON.stringify(cards));
+
+            // スプレッドシート(GAS)連携URLが設定されている場合は自動送信
+            if (gasWebAppUrl) {
+                fetch(gasWebAppUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(card)
+                }).then(() => {
+                    console.log('スプレッドシートへ送信完了');
+                }).catch(err => {
+                    console.error('スプレッドシート送信エラー:', err);
+                });
+            }
 
             input.value = '';
             loadCards();
