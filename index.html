@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts (Kiwi Maru for kid-friendly text) -->
     <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- 漢字からひらがな変換用ライブラリ (kuromoji) -->
-    <script src="https://cdn.jsdelivr.net/npm/kuromoji@0.1.5/build/kuromoji.js"></script>
     <style>
         body {
             font-family: 'Kiwi Maru', serif;
@@ -87,7 +85,8 @@
                 class="bg-rose-100 hover:bg-rose-200 text-rose-800 border-2 border-rose-300 font-bold px-5 py-3 rounded-2xl flex items-center gap-3 shadow-sm active:scale-95 transition">
                 <i class="fa-solid fa-microphone text-rose-600 text-2xl"></i>
                 <div class="text-left">
-                    <div class="text-sm font-bold" id="mic-perm-status-text">🎤 さいしょに マイクを つかう じゅんび　</div>
+                    <div class="text-sm font-bold" id="mic-perm-status-text">🎤 さいしょに マイクを つかう じゅんび（きょか）</div>
+                    <div class="text-xs text-rose-600">（おしゃべり にゅうりょくを つかうひとは おしてね）</div>
                 </div>
             </button>
 
@@ -117,7 +116,7 @@
                         <button onclick="filterStudentSubject('こくご')" id="s-tab-こくご" class="action-btn px-3.5 py-2 rounded-2xl font-bold bg-rose-100 text-rose-800 border border-rose-300 whitespace-nowrap">📖 こくご</button>
                         <button onclick="filterStudentSubject('さんすう')" id="s-tab-さんすう" class="action-btn px-3.5 py-2 rounded-2xl font-bold bg-sky-100 text-sky-800 border border-sky-300 whitespace-nowrap">📐 さんすう</button>
                         <button onclick="filterStudentSubject('せいかつ')" id="s-tab-せいかつ" class="action-btn px-3.5 py-2 rounded-2xl font-bold bg-amber-100 text-amber-800 border border-amber-300 whitespace-nowrap">🌱 せいかつ</button>
-                        <button onclick="filterStudentSubject('おんがく')" id="s-tab-おんがく" class="action-btn px-3.5 py-2 rounded-2xl font-bold bg-purple-100 text-purple-800 border border-purple-300 whitespace-nowrap">🎵 おん发がく</button>
+                        <button onclick="filterStudentSubject('おんがく')" id="s-tab-おんがく" class="action-btn px-3.5 py-2 rounded-2xl font-bold bg-purple-100 text-purple-800 border border-purple-300 whitespace-nowrap">🎵 おんがく</button>
                         <button onclick="filterStudentSubject('ずこう')" id="s-tab-ずこう" class="action-btn px-3.5 py-2 rounded-2xl font-bold bg-orange-100 text-orange-800 border border-orange-300 whitespace-nowrap">🎨 ずこう</button>
                     </div>
                 </div>
@@ -250,87 +249,6 @@
             </div>
         </section>
 
-        <!-- ================= PAGE 3: ばんごうえらび (1〜35) ================= -->
-        <section id="page-3" class="page-view w-full hidden flex-col items-center gap-4">
-            <div class="text-center my-1 flex flex-col items-center gap-1 w-full max-w-md">
-                <button onclick="speakText('きみは なんばん？')" class="bg-amber-100 hover:bg-amber-200 text-amber-900 border-2 border-amber-300 px-4 py-1.5 rounded-full font-bold text-sm flex items-center gap-2 shadow-sm">
-                    <i class="fa-solid fa-volume-high text-amber-600"></i>
-                    <span>きく</span>
-                </button>
-                <h2 class="text-3xl font-bold text-emerald-900 mt-1">きみは なんばん？</h2>
-            </div>
-
-            <!-- 1〜35のばんごうグリッドボタン -->
-            <div id="number-grid" class="grid grid-cols-5 md:grid-cols-7 gap-2.5 w-full max-w-lg bg-white p-4 rounded-3xl border-3 border-emerald-300 shadow-sm">
-                <!-- JSで1〜35のボタンを自動生成 -->
-            </div>
-        </section>
-
-        <!-- ================= PAGE 4: きょうかえらび ================= -->
-        <section id="page-4" class="page-view w-full hidden flex-col items-center gap-4">
-            <div class="text-center mt-2 flex flex-col items-center gap-1">
-                <button onclick="speakText('なんのべんきょう？')" class="bg-amber-100 hover:bg-amber-200 text-amber-900 border-2 border-amber-300 px-4 py-1.5 rounded-full font-bold text-sm flex items-center gap-2 shadow-sm">
-                    <i class="fa-solid fa-volume-high text-amber-600"></i>
-                    <span>きく</span>
-                </button>
-                <h2 class="text-3xl font-bold text-emerald-900 mt-1">なんの べんきょう？</h2>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-md">
-                <button id="subj-btn-こくご" onclick="selectSubjectAndNext('こくご')" class="subj-btn action-btn bg-rose-50 border-4 border-rose-300 text-rose-800 rounded-3xl p-5 flex flex-col items-center justify-center gap-2">
-                    <span class="text-4xl">📖</span>
-                    <span class="text-2xl font-bold">こくご</span>
-                </button>
-
-                <button id="subj-btn-さんすう" onclick="selectSubjectAndNext('さんすう')" class="subj-btn action-btn bg-sky-50 border-4 border-sky-300 text-sky-800 rounded-3xl p-5 flex flex-col items-center justify-center gap-2">
-                    <span class="text-4xl">📐</span>
-                    <span class="text-2xl font-bold">さんすう</span>
-                </button>
-
-                <button id="subj-btn-せいかつ" onclick="selectSubjectAndNext('せいかつ')" class="subj-btn action-btn bg-amber-50 border-4 border-amber-300 text-amber-800 rounded-3xl p-5 flex flex-col items-center justify-center gap-2">
-                    <span class="text-4xl">🌱</span>
-                    <span class="text-2xl font-bold">せいかつ</span>
-                </button>
-
-                <button id="subj-btn-おんがく" onclick="selectSubjectAndNext('おんがく')" class="subj-btn action-btn bg-purple-50 border-4 border-purple-300 text-purple-800 rounded-3xl p-5 flex flex-col items-center justify-center gap-2">
-                    <span class="text-4xl">🎵</span>
-                    <span class="text-2xl font-bold">おんがく</span>
-                </button>
-
-                <button id="subj-btn-ずこう" onclick="selectSubjectAndNext('ずこう')" class="subj-btn action-btn bg-orange-50 border-4 border-orange-300 text-orange-800 rounded-3xl p-5 flex flex-col items-center justify-center gap-2 col-span-2 md:col-span-1">
-                    <span class="text-4xl">🎨</span>
-                    <span class="text-2xl font-bold">ずこう</span>
-                </button>
-            </div>
-        </section>
-
-        <!-- ================= PAGE 5: おおきなかくにん画面 (◯くみ ◯ばん ◯◯？) ================= -->
-        <section id="page-confirm-info" class="page-view w-full hidden flex-col items-center gap-6 my-auto py-6">
-            <div class="bg-white border-4 border-emerald-400 rounded-3xl p-8 w-full max-w-md text-center shadow-xl flex flex-col items-center gap-6">
-                <div class="text-yellow-500 text-5xl">✨</div>
-                
-                <div class="flex flex-col gap-2">
-                    <p class="text-xl font-bold text-slate-600">あなたの ふりかえりは</p>
-                    <p id="confirm-big-text" class="text-4xl md:text-5xl font-extrabold text-emerald-800 my-2 leading-tight">
-                        1くみ 5ばん？
-                    </p>
-                    <span id="confirm-subject-badge-big" class="inline-block bg-emerald-500 text-white font-bold text-2xl px-6 py-2 rounded-full self-center shadow-sm">
-                        こくご
-                    </span>
-                </div>
-
-                <div class="w-full flex gap-3 mt-4">
-                    <button onclick="goToPage(2)" class="flex-1 bg-slate-100 hover:bg-slate-200 border-2 border-slate-300 text-slate-700 font-bold text-xl py-4 rounded-2xl active:scale-95 transition">
-                        👈 なおす
-                    </button>
-                    <button onclick="confirmBigOk()" class="action-btn flex-1 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-extrabold text-4xl py-4 rounded-2xl shadow-lg border-2 border-white flex items-center justify-center gap-2 active:scale-95 transition">
-                        <span>👌</span>
-                        <span class="text-2xl">これでOK</span>
-                    </button>
-                </div>
-            </div>
-        </section>
-
         <!-- ================= PAGE 6: テーマえらび ================= -->
         <section id="page-6" class="page-view w-full hidden flex-col items-center gap-4">
             <div class="text-center my-1 flex flex-col items-center gap-2">
@@ -373,55 +291,76 @@
         </section>
 
         <!-- ================= PAGE 7: おしゃべり にゅうりょく がめん ================= -->
-        <section id="page-7" class="page-view w-full hidden flex-col items-center gap-5">
+        <section id="page-7" class="page-view w-full hidden flex-col items-center gap-3">
             <!-- せんたくされたせっていのひょうじヘッダー -->
-            <div class="w-full bg-emerald-100 border-2 border-emerald-300 rounded-2xl p-3 flex items-center justify-between">
-                <div class="flex items-center gap-2 flex-wrap">
-                    <span id="input-class-tag" class="bg-emerald-800 text-white font-bold text-sm px-3 py-1 rounded-full">1ねん1くみ</span>
-                    <span id="input-number-tag" class="bg-emerald-700 text-white font-bold text-sm px-3 py-1 rounded-full">1ばん</span>
-                    <span id="input-subject-tag" class="bg-emerald-500 text-white font-bold text-sm px-3 py-1 rounded-full">こくご</span>
-                    <span id="input-topic-tag" class="text-emerald-900 font-bold text-base md:text-lg">たのしかったこと</span>
+            <div class="w-full bg-emerald-100 border-2 border-emerald-300 rounded-2xl p-2.5 flex items-center justify-between">
+                <div class="flex items-center gap-1.5 flex-wrap">
+                    <span id="input-class-tag" class="bg-emerald-800 text-white font-bold text-xs md:text-sm px-2.5 py-0.5 rounded-full">1ねん1くみ</span>
+                    <span id="input-number-tag" class="bg-emerald-700 text-white font-bold text-xs md:text-sm px-2.5 py-0.5 rounded-full">1ばん</span>
+                    <span id="input-subject-tag" class="bg-emerald-500 text-white font-bold text-xs md:text-sm px-2.5 py-0.5 rounded-full">こくご</span>
+                    <span id="input-topic-tag" class="text-emerald-900 font-bold text-sm md:text-base">たのしかったこと</span>
                 </div>
-                <button onclick="goToPage(2)" class="text-xs text-emerald-700 underline font-bold">えらびなおす</button>
+                <button onclick="goToPage(2)" class="text-xs text-emerald-700 underline font-bold whitespace-nowrap">えらびなおす</button>
             </div>
 
             <!-- メインおしゃべりエリア -->
-            <div class="w-full bg-white p-5 rounded-3xl shadow-sm border-2 border-emerald-200 flex flex-col items-center gap-5">
+            <div class="w-full bg-white p-3 md:p-4 rounded-3xl shadow-sm border-2 border-emerald-200 flex flex-col items-center gap-3">
 
                 <!-- おおきなおしゃべり（おんせいにゅうりょく）ボタン -->
-                <div class="flex flex-col items-center justify-center w-full my-2">
+                <div class="flex flex-col items-center justify-center w-full">
                     <button id="mic-btn" onclick="toggleSpeech()" 
-                        class="action-btn w-full max-w-md py-8 px-6 bg-gradient-to-r from-rose-400 to-pink-500 text-white font-bold text-2xl rounded-3xl flex items-center justify-center gap-4 transition transform active:scale-95 shadow-lg border-4 border-white">
-                        <i id="mic-icon" class="fa-solid fa-microphone text-5xl"></i>
+                        class="action-btn w-full max-w-md py-4 px-4 bg-gradient-to-r from-rose-400 to-pink-500 text-white font-bold text-xl rounded-2xl flex items-center justify-center gap-3 transition transform active:scale-95 shadow-md border-2 border-white">
+                        <i id="mic-icon" class="fa-solid fa-microphone text-3xl"></i>
                         <span id="mic-text">ここをおして おはなししてね</span>
                     </button>
-                    <p id="mic-status" class="text-emerald-700 font-bold text-lg mt-3 h-6 text-center"></p>
+                    <p id="mic-status" class="text-emerald-700 font-bold text-sm mt-1 h-5 text-center"></p>
                 </div>
 
-                <!-- はなしたことばのひょうじらん -->
-                <div class="w-full relative">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-sm font-bold text-slate-500">ききとった ことば (ひらがな):</span>
-                        <div class="flex gap-2">
+                <!-- はなしたことばのひょうじらん（画面上部にしっかり見えるようにコンパクト化） -->
+                <div class="w-full sticky top-16 z-20 bg-white pt-1">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-xs font-bold text-slate-600">✍️ つくった ことば:</span>
+                        <div class="flex gap-1.5">
                             <!-- 自分で聞けるよんであげるボタン -->
-                            <button onclick="speakInputText()" class="action-btn text-sm bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold px-4 py-1.5 rounded-full shadow-sm flex items-center gap-1.5 border border-amber-300">
-                                <i class="fa-solid fa-volume-high text-base"></i>
+                            <button onclick="speakInputText()" class="action-btn text-xs bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold px-3 py-1 rounded-full shadow-sm flex items-center gap-1 border border-amber-300">
+                                <i class="fa-solid fa-volume-high text-sm"></i>
                                 <span>よんであげる</span>
                             </button>
-                            <button onclick="clearText()" class="text-xs bg-rose-100 text-rose-600 font-bold px-3 py-1.5 rounded-full hover:bg-rose-200">
-                                <i class="fa-solid fa-trash mr-1"></i> けす
+                            <button onclick="deleteLastChar()" class="action-btn text-xs bg-amber-100 text-amber-800 border border-amber-300 font-bold px-2.5 py-1 rounded-full hover:bg-amber-200">
+                                ⌫ 1もじけす
+                            </button>
+                            <button onclick="clearText()" class="text-xs bg-rose-100 text-rose-600 font-bold px-2.5 py-1 rounded-full hover:bg-rose-200">
+                                🗑️ ぜんぶけす
                             </button>
                         </div>
                     </div>
-                    <textarea id="text-input" rows="4" readonly
-                        class="w-full p-4 text-2xl leading-relaxed rounded-2xl border-2 border-slate-300 focus:border-emerald-500 focus:outline-none bg-amber-50/30 text-slate-800 resize-none font-bold"
-                        placeholder="ここにおはなししたことばがでるよ！"></textarea>
+                    <!-- テキストエリアの高さを調整し見やすく配置 -->
+                    <textarea id="text-input" rows="2" readonly inputmode="none"
+                        class="w-full p-3 text-xl md:text-2xl leading-relaxed rounded-2xl border-2 border-emerald-400 bg-amber-50/40 text-slate-800 resize-none font-bold select-none shadow-inner"
+                        placeholder="ここにおはなししたことばがでるよ！下のあいうえおボタンでなおすこともできるよ。"></textarea>
+                </div>
+
+                <!-- 50音（あいうえお）キーボード -->
+                <div class="w-full bg-emerald-50/80 border-2 border-emerald-200 rounded-2xl p-2 shadow-inner">
+                    <div class="flex justify-between items-center mb-1.5 px-1">
+                        <span class="text-xs font-bold text-emerald-900 flex items-center gap-1">
+                            <i class="fa-solid fa-keyboard text-emerald-600"></i>
+                            <span>あいうえお ひょう（おして にゅうりょく）</span>
+                        </span>
+                        <div class="flex gap-1">
+                            <button onclick="appendChar(' ')" class="text-xs bg-white hover:bg-emerald-100 border border-emerald-300 px-2 py-0.5 rounded-lg text-emerald-900 font-bold shadow-sm active:scale-95">（すぺーす）</button>
+                        </div>
+                    </div>
+                    
+                    <div id="aiueo-grid" class="grid grid-cols-5 gap-1 text-center max-h-60 overflow-y-auto p-0.5">
+                        <!-- JavaScriptで50音キーを自動生成 -->
+                    </div>
                 </div>
 
                 <!-- かんりょう（ほぞん）ボタン -->
                 <button onclick="saveCard()" 
-                    class="action-btn w-full max-w-md py-5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold text-2xl rounded-2xl flex items-center justify-center gap-3 hover:brightness-105 transition active:scale-95 shadow-md">
-                    <i class="fa-solid fa-paper-plane text-2xl text-yellow-300"></i>
+                    class="action-btn w-full max-w-md py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold text-xl rounded-2xl flex items-center justify-center gap-2 hover:brightness-105 transition active:scale-95 shadow-md border-2 border-white mt-1">
+                    <i class="fa-solid fa-paper-plane text-xl text-yellow-300"></i>
                     <span>これで できた！</span>
                 </button>
             </div>
@@ -529,45 +468,142 @@
         let selectedCardForStamp = null;
         let isMicApproved = false;
 
-        // 漢字からひらがな変換用ライブラリ (kuromoji)
-        let tokenizer = null;
+        // 50音表の文字配列（あいうえお順に5列でぴったり揃うマス目配置）
+        const aiueoChars = [
+            'あ','い','う','え','お',
+            'か','き','く','け','こ',
+            'さ','し','す','せ','そ',
+            'た','ち','つ','て','と',
+            'な','に','ぬ','ね','の',
+            'は','ひ','ふ','へ','ほ',
+            'ま','み','む','め','も',
+            'や','、','ゆ','。','よ',
+            'ら','り','る','れ','ろ',
+            'わ','','','','を',
+            'ん','っ','ゃ','ゅ','ょ',
+            'が','ぎ','ぐ','げ','ご',
+            'ざ','じ','ず','ぜ','ぞ',
+            'だ','ぢ','づ','で','ど',
+            'ば','び','ぶ','べ','ぼ',
+            'ぱ','ぴ','ぷ','ぺ','ぽ'
+        ];
 
-        // kuromojiの初期化
-        if (typeof kuromoji !== 'undefined') {
-            kuromoji.builder({ dicPath: "https://cdn.jsdelivr.net/npm/kuromoji@0.1.5/dict/" }).build((err, _tokenizer) => {
-                if (err) {
-                    console.error("kuromoji init error:", err);
+        // 50音キーボードの自動生成
+        function renderAiueoGrid() {
+            const grid = document.getElementById('aiueo-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            aiueoChars.forEach(char => {
+                const btn = document.createElement('button');
+                if (char === '') {
+                    // わ・を の間をあける透明な空マス
+                    btn.className = "p-2 rounded-xl pointer-events-none invisible";
+                    btn.tabIndex = -1;
+                } else if (char === '、' || char === '。') {
+                    // 「、」「。」は分かりやすいように黄色（amber）のスタイルに
+                    btn.className = "bg-amber-200 hover:bg-amber-300 border-2 border-amber-400 font-extrabold py-2 rounded-xl text-xl text-amber-950 shadow-sm active:scale-95 transition flex items-center justify-center";
+                    btn.textContent = char;
+                    btn.onclick = () => appendChar(char);
                 } else {
-                    tokenizer = _tokenizer;
+                    btn.className = "bg-white hover:bg-emerald-100 border border-emerald-300 font-bold py-2 rounded-xl text-lg text-emerald-950 shadow-sm active:scale-95 transition flex items-center justify-center";
+                    btn.textContent = char;
+                    btn.onclick = () => appendChar(char);
                 }
+                grid.appendChild(btn);
             });
         }
 
-        // テキスト内の漢字をすべてひらがなに変換し、わかち書き（スペース区切り）で返す関数
-        function convertToHiragana(text) {
+        // 文字の追加処理（50音ボタン用・入力欄への全画面自動表示追従）
+        function appendChar(char) {
+            const input = document.getElementById('text-input');
+            input.value += char;
+            speakText(char);
+            
+            // 入力中の文字が常に見えるようにスクロール最下部へ移動
+            input.scrollTop = input.scrollHeight;
+        }
+
+        // 1文字削除機能（削除時もスクロールを維持）
+        function deleteLastChar() {
+            const input = document.getElementById('text-input');
+            const text = input.value;
+            if (text.length > 0) {
+                input.value = text.slice(0, -1);
+            }
+            input.scrollTop = input.scrollHeight;
+        }
+
+        // --- 強力な漢字→ひらがな変換・分ち書きエンジン ---
+        const kanjiToHiraMap = {
+            "愛":"あい","可愛":"かわい","飾":"かざ","事":"こと","出来":"でき","出来た":"できた",
+            "私":"わたし","僕":"ぼく","俺":"おれ","学校":"がっこう","先生":"せんせい","友達":"ともだち",
+            "勉強":"べんきょう","今日":"きょう","明日":"あした","昨日":"きのう","時間":"じかん",
+            "作":"つく","書":"か","読":"よ","話":"はな","聞":"き","見":"み","行":"い","来":"き",
+            "走":"はし","泳":"およ","遊":"あそ","楽":"たの","面白":"おもしろ","嬉":"うれ","悲":"かな",
+            "難":"むずか","易":"やさ","高":"たか","低":"ひく","大":"おお","小":"ちい","新":"あたら",
+            "古":"ふる","良":"よ","悪":"わる","勝":"か","負":"ま","組":"ぐみ","番":"ばん",
+            "国語":"こくご","算数":"さんすう","生活":"せいかつ","音楽":"おんがく","図工":"ずこう",
+            "体育":"たいいく","理科":"りか","社会":"しゃかい","英語":"えいご"
+        };
+
+        // 形態素解析的なひらがな化＋分ち書き関数
+        function forceAllHiragana(text) {
             if (!text) return "";
-            if (!tokenizer) {
-                return kataToHira(text);
+            
+            let result = text;
+
+            // 1. カタカナをひらがなに変換
+            result = result.replace(/[\u30a1-\u30f6]/g, function(match) {
+                return String.fromCharCode(match.charCodeAt(0) - 0x60);
+            });
+
+            // 2. 登録済み漢字・熟語を置換
+            const sortedKeys = Object.keys(kanjiToHiraMap).sort((a, b) => b.length - a.length);
+            for (let key of sortedKeys) {
+                const reg = new RegExp(key, 'g');
+                result = result.replace(reg, kanjiToHiraMap[key]);
             }
-            try {
-                const tokens = tokenizer.tokenize(text);
-                // 各単語（トークン）をひらがなに変換しスペースで連結してわかち書きにする
-                return tokens.map(token => {
-                    let word = token.reading ? token.reading : token.surface_form;
-                    return kataToHira(word);
-                }).filter(w => w.trim().length > 0).join(' ');
-            } catch (e) {
-                console.error("Hiragana conversion error:", e);
-                return kataToHira(text);
-            }
+
+            // 3. 残った漢字をひらがな仮変換
+            result = convertRemainingKanji(result);
+
+            // 4. 分ち書き（スペース自動挿入）
+            result = formatWakatigaki(result);
+
+            return result;
         }
 
-        // カタカナをひらがなに変換する補助関数
-        function kataToHira(str) {
-            return str.replace(/[\u30a1-\u30f6]/g, function(match) {
-                var chr = match.charCodeAt(0) - 0x60;
-                return String.fromCharCode(chr);
+        // 残った単漢字のひらがな変換処理
+        function convertRemainingKanji(str) {
+            const singleKanjiMap = {
+                "一":"いち","二":"に","三":"さん","四":"よん","五":"ご","六":"ろく","七":"なな","八":"はち","九":"きゅう","十":"じゅう",
+                "百":"ひゃく","千":"せん","上":"うえ","下":"した","左":"ひだり","右":"みぎ","中":"なか","外":"そと",
+                "前":"まえ","後":"うしろ","午":"ご","門":"もん","間":"あいだ","東":"ひがし","西":"にし","南":"みなみ","北":"きた",
+                "男":"おとこ","女":"おんな","子":"こ","父":"ちち","母":"はは","人":"ひと","名":"な","目":"め","耳":"みみ",
+                "口":"くち","手":"て","足":"あし","体":"からだ","首":"くび","心":"こころ","力":"ちから",
+                "日":"ひ","月":"つき","火":"ひ","水":"みず","木":"き","金":"かね","土":"つち","年":"とし",
+                "時":"とき","分":"ふん","半":"はん","今":"いま","朝":"あさ","昼":"ひる","夜":"よる","夕":"ゆう",
+                "春":"はる","夏":"なつ","秋":"あき","冬":"ふゆ","天":"てん","気":"き","雨":"あめ","雪":"ゆき",
+                "風":"かぜ","空":"そら","山":"やま","川":"かわ","田":"た","花":"はな","草":"くさ","竹":"たけ",
+                "貝":"かい","石":"いし","魚":"さかな","虫":"むし","犬":"いぬ","猫":"ねこ","鳥":"とり","馬":"うま",
+                "赤":"あか","青":"あお","白":"しろ","黒":"くろ","黄":"き","緑":"みどり",
+                "円":"えん","玉":"たま","王":"おう","音":"おと","立":"た","休":"やす","入":"はい","出":"だ",
+                "本":"ほん","文":"ぶん","字":"じ","校":"こう","正":"ただ","生":"せい","先":"せん","村":"むら","町":"まち"
+            };
+
+            return str.replace(/[\u4e00-\u9faf]/g, function(kanji) {
+                return singleKanjiMap[kanji] || "";
             });
+        }
+
+        // ひらがな文の「わかち書き（分ち書き）」整形
+        function formatWakatigaki(text) {
+            if (!text) return "";
+            let formatted = text
+                .replace(/(で|に|を|が|は|へ|と|から|より|まで|の|て|た|よ|ね|とも)(?=[あ-ん])/g, "$1 ")
+                .replace(/\s+/g, " ")
+                .trim();
+            return formatted;
         }
 
         // HTMLエスケープ処理
@@ -599,6 +635,7 @@
         window.onload = function() {
             initSpeechRecognition();
             renderNumberGrid();
+            renderAiueoGrid();
             loadCards();
             setTimeout(() => {
                 speakText('きょうの べんきょうを ふりかえろう！');
@@ -629,7 +666,6 @@
             navigator.mediaDevices.getUserMedia({ audio: true })
                 .then(function(stream) {
                     isMicApproved = true;
-                    // トラックをすぐ停止してマイクを一旦解放
                     stream.getTracks().forEach(track => track.stop());
                     const statusBtn = document.getElementById('mic-perm-btn');
                     const statusText = document.getElementById('mic-perm-status-text');
@@ -645,12 +681,11 @@
                 });
         }
 
-        // --- クラスえらび（ボタンタップで選択状態にし、「いいよ」で次へ） ---
+        // --- クラスえらび ---
         function selectClass(clsNum) {
             selectedClass = `${clsNum}くみ`;
             speakText(`${clsNum}くみ`);
 
-            // ボタンの選択見た目を更新
             document.querySelectorAll('.class-btn').forEach(btn => {
                 btn.classList.remove('selected-option', 'bg-emerald-200', 'border-emerald-600');
             });
@@ -659,7 +694,6 @@
                 selBtn.classList.add('selected-option');
             }
 
-            // 「いいよ」ボタンを有効化
             const nextBtn = document.getElementById('class-next-btn');
             if (nextBtn) {
                 nextBtn.disabled = false;
@@ -673,12 +707,11 @@
             goToPage(3);
         }
 
-        // --- ばんごうえらび（ボタンタップで選択状態にし、「いいよ」で次へ） ---
+        // --- ばんごうえらび ---
         function selectNumber(numStr) {
             studentNumber = numStr;
             speakText(`${numStr}ばん`);
 
-            // ボタンの選択見た目を更新
             document.querySelectorAll('.num-btn').forEach(btn => {
                 btn.classList.remove('selected-option', 'bg-amber-300', 'border-amber-600');
             });
@@ -687,7 +720,6 @@
                 selBtn.classList.add('selected-option');
             }
 
-            // 「いいよ」ボタンを有効化
             const nextBtn = document.getElementById('number-next-btn');
             if (nextBtn) {
                 nextBtn.disabled = false;
@@ -701,12 +733,11 @@
             goToPage(4);
         }
 
-        // --- きょうかえらび（ボタンタップで選択状態にし、「いいよ」で次へ） ---
+        // --- きょうかえらび ---
         function selectSubject(subj) {
             selectedSubject = subj;
             speakText(subj);
 
-            // ボタンの選択見た目を更新
             document.querySelectorAll('.subj-btn').forEach(btn => {
                 btn.classList.remove('selected-option');
             });
@@ -715,7 +746,6 @@
                 selBtn.classList.add('selected-option');
             }
 
-            // 「いいよ」ボタンを有効化
             const nextBtn = document.getElementById('subj-next-btn');
             if (nextBtn) {
                 nextBtn.disabled = false;
@@ -745,7 +775,6 @@
             goToPage(7);
         }
 
-        // 大型確認画面での「👌 いいよ」確定
         function confirmBigOk() {
             speakText('いいよ！');
             document.getElementById('selected-subject-badge').textContent = selectedSubject;
@@ -768,7 +797,6 @@
                 }
             });
 
-            // 戻るボタンの表示切替
             const backBtn = document.getElementById('nav-back-btn');
             if (pageNum > 1 && pageNum !== 'teacher') {
                 backBtn.classList.remove('hidden');
@@ -778,11 +806,9 @@
                 backBtn.classList.remove('flex');
             }
 
-            // ページごとの音声ガイダンスと初期状態
             if (pageNum === 1) {
                 speakText('きょうの べんきょうを ふりかえろう！');
             } else if (pageNum === 2) {
-                // クラス切り替え時の初期化
                 selectedClass = '';
                 document.querySelectorAll('.class-btn').forEach(btn => btn.classList.remove('selected-option'));
                 const nextBtn = document.getElementById('class-next-btn');
@@ -792,7 +818,6 @@
                 }
                 speakText('なにぐみ？');
             } else if (pageNum === 3) {
-                // 番号切り替え時の初期化
                 studentNumber = '';
                 document.querySelectorAll('.num-btn').forEach(btn => btn.classList.remove('selected-option'));
                 const nextBtn = document.getElementById('number-next-btn');
@@ -802,7 +827,6 @@
                 }
                 speakText('きみは なんばん？');
             } else if (pageNum === 4) {
-                // 教科切り替え時の初期化
                 selectedSubject = '';
                 document.querySelectorAll('.subj-btn').forEach(btn => btn.classList.remove('selected-option'));
                 const nextBtn = document.getElementById('subj-next-btn');
@@ -903,9 +927,19 @@
                 }
                 if (transcript) {
                     const input = document.getElementById('text-input');
-                    // 漢字をすべてひらがな・わかち書きに変換
-                    const convertedText = convertToHiragana(transcript);
-                    input.value += (input.value ? ' ' : '') + convertedText;
+                    const convertedText = forceAllHiragana(transcript);
+                    
+                    const start = input.selectionStart;
+                    const end = input.selectionEnd;
+                    const text = input.value;
+                    const before = text.substring(0, start);
+                    const after = text.substring(end, text.length);
+                    
+                    const insertText = (before && !before.endsWith(' ') ? ' ' : '') + convertedText;
+                    input.value = before + insertText + after;
+                    
+                    input.selectionStart = input.selectionEnd = start + insertText.length;
+                    input.scrollTop = input.scrollHeight;
                 }
             };
 
@@ -1105,9 +1139,6 @@
                         <button onclick="speakText('${escapeHTML(card.content)}')" class="text-xs bg-emerald-100 text-emerald-700 font-bold px-3 py-1.5 rounded-full hover:bg-emerald-200 flex items-center gap-1">
                             <i class="fa-solid fa-volume-high"></i> よんであげる
                         </button>
-                        <button onclick="deleteCard(${card.id})" class="text-xs text-slate-300 hover:text-rose-500 font-bold">
-                            <i class="fa-solid fa-trash"></i> けす
-                        </button>
                     </div>
                 `;
                 container.appendChild(cardEl);
@@ -1217,14 +1248,12 @@
                 return;
             }
 
-            // TSV（Tab Separated Values）を作成（Googleスプレッドシートに直接貼り付け可能）
             let tsvText = "日付\t教科\t児童名\tテーマ\t振り返り内容\tスタンプ\n";
             cards.forEach(c => {
                 const cleanContent = c.content.replace(/\n/g, ' ');
                 tsvText += `${c.date}\t${c.subject}\t${c.studentName || ''}\t${c.topic}\t${cleanContent}\t${c.stamp || ''}\n`;
             });
 
-            // クリップボードへコピー
             const tempTextarea = document.createElement('textarea');
             tempTextarea.value = tsvText;
             document.body.appendChild(tempTextarea);
@@ -1243,7 +1272,7 @@
                 return;
             }
 
-            let csvContent = "\uFEFF"; // UTF-8 BOM
+            let csvContent = "\uFEFF";
             csvContent += "日付,児童名,教科,テーマ,振り返り内容,スタンプ\n";
 
             cards.forEach(c => {
