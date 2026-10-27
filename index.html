@@ -140,13 +140,111 @@
                 <h2 class="text-3xl font-bold text-emerald-900 mt-2">なにぐみ？</h2>
                 
                 <div class="grid grid-cols-2 gap-4 w-full mt-4">
-                    <button id="class-btn-1" onclick="selectClassAndNext('1')" class="class-btn action-btn bg-emerald-50 hover:bg-emerald-100 border-4 border-emerald-300 text-emerald-900 rounded-3xl p-8 flex flex-col items-center justify-center gap-2 text-3xl font-extrabold shadow-md">
+                    <button id="class-btn-1" onclick="selectClass('1')" class="class-btn action-btn bg-emerald-50 hover:bg-emerald-100 border-4 border-emerald-300 text-emerald-900 rounded-3xl p-8 flex flex-col items-center justify-center gap-2 text-3xl font-extrabold shadow-md">
                         <span>🏫</span>
                         <span>1くみ</span>
                     </button>
-                    <button id="class-btn-2" onclick="selectClassAndNext('2')" class="class-btn action-btn bg-emerald-50 hover:bg-emerald-100 border-4 border-emerald-300 text-emerald-900 rounded-3xl p-8 flex flex-col items-center justify-center gap-2 text-3xl font-extrabold shadow-md">
+                    <button id="class-btn-2" onclick="selectClass('2')" class="class-btn action-btn bg-emerald-50 hover:bg-emerald-100 border-4 border-emerald-300 text-emerald-900 rounded-3xl p-8 flex flex-col items-center justify-center gap-2 text-3xl font-extrabold shadow-md">
                         <span>🏫</span>
                         <span>2くみ</span>
+                    </button>
+                </div>
+
+                <!-- 次へすすむ「いいよ」ボタン -->
+                <button id="class-next-btn" onclick="confirmClassNext()" disabled
+                    class="action-btn w-full mt-6 py-4 bg-slate-300 text-slate-500 font-extrabold text-2xl rounded-2xl flex items-center justify-center gap-2 shadow-md transition">
+                    <span>👌</span>
+                    <span>いいよ</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 3: ばんごうえらび (1〜35) ================= -->
+        <section id="page-3" class="page-view w-full hidden flex-col items-center gap-4">
+            <div class="text-center my-1 flex flex-col items-center gap-1 w-full max-w-md">
+                <button onclick="speakText('きみは なんばん？')" class="bg-amber-100 hover:bg-amber-200 text-amber-900 border-2 border-amber-300 px-4 py-1.5 rounded-full font-bold text-sm flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-volume-high text-amber-600"></i>
+                    <span>きく</span>
+                </button>
+                <h2 class="text-3xl font-bold text-emerald-900 mt-1">きみは なんばん？</h2>
+            </div>
+
+            <!-- 1〜35のばんごうグリッドボタン -->
+            <div id="number-grid" class="grid grid-cols-5 md:grid-cols-7 gap-2.5 w-full max-w-lg bg-white p-4 rounded-3xl border-3 border-emerald-300 shadow-sm">
+                <!-- JSで1〜35のボタンを自動生成 -->
+            </div>
+
+            <!-- 次へすすむ「いいよ」ボタン -->
+            <button id="number-next-btn" onclick="confirmNumberNext()" disabled
+                class="action-btn w-full max-w-md py-4 bg-slate-300 text-slate-500 font-extrabold text-2xl rounded-2xl flex items-center justify-center gap-2 shadow-md transition">
+                <span>👌</span>
+                <span>いいよ</span>
+            </button>
+        </section>
+
+        <!-- ================= PAGE 4: きょうかえらび ================= -->
+        <section id="page-4" class="page-view w-full hidden flex-col items-center gap-4">
+            <div class="text-center mt-2 flex flex-col items-center gap-1">
+                <button onclick="speakText('なんのべんきょう？')" class="bg-amber-100 hover:bg-amber-200 text-amber-900 border-2 border-amber-300 px-4 py-1.5 rounded-full font-bold text-sm flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-volume-high text-amber-600"></i>
+                    <span>きく</span>
+                </button>
+                <h2 class="text-3xl font-bold text-emerald-900 mt-1">なんの べんきょう？</h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-md">
+                <button id="subj-btn-こくご" onclick="selectSubject('こくご')" class="subj-btn action-btn bg-rose-50 border-4 border-rose-300 text-rose-800 rounded-3xl p-5 flex flex-col items-center justify-center gap-2">
+                    <span class="text-4xl">📖</span>
+                    <span class="text-2xl font-bold">こくご</span>
+                </button>
+
+                <button id="subj-btn-さんすう" onclick="selectSubject('さんすう')" class="subj-btn action-btn bg-sky-50 border-4 border-sky-300 text-sky-800 rounded-3xl p-5 flex flex-col items-center justify-center gap-2">
+                    <span class="text-4xl">📐</span>
+                    <span class="text-2xl font-bold">さんすう</span>
+                </button>
+
+                <button id="subj-btn-せいかつ" onclick="selectSubject('せいかつ')" class="subj-btn action-btn bg-amber-50 border-4 border-amber-300 text-amber-800 rounded-3xl p-5 flex flex-col items-center justify-center gap-2">
+                    <span class="text-4xl">🌱</span>
+                    <span class="text-2xl font-bold">せいかつ</span>
+                </button>
+
+                <button id="subj-btn-おんがく" onclick="selectSubject('おんがく')" class="subj-btn action-btn bg-purple-50 border-4 border-purple-300 text-purple-800 rounded-3xl p-5 flex flex-col items-center justify-center gap-2">
+                    <span class="text-4xl">🎵</span>
+                    <span class="text-2xl font-bold">おんがく</span>
+                </button>
+
+                <button id="subj-btn-ずこう" onclick="selectSubject('ずこう')" class="subj-btn action-btn bg-orange-50 border-4 border-orange-300 text-orange-800 rounded-3xl p-5 flex flex-col items-center justify-center gap-2 col-span-2 md:col-span-1">
+                    <span class="text-4xl">🎨</span>
+                    <span class="text-2xl font-bold">ずこう</span>
+                </button>
+            </div>
+
+            <!-- 次へすすむ「いいよ」ボタン -->
+            <button id="subj-next-btn" onclick="confirmSubjectNext()" disabled
+                class="action-btn w-full max-w-md py-4 bg-slate-300 text-slate-500 font-extrabold text-2xl rounded-2xl flex items-center justify-center gap-2 shadow-md transition">
+                <span>👌</span>
+                <span>いいよ</span>
+            </button>
+        </section>
+
+        <!-- ================= PAGE 5: おおきなかくにん画面 (◯ぐみ ◯ばん ◯◯のべんきょうで かくよ。) ================= -->
+        <section id="page-confirm-info" class="page-view w-full hidden flex-col items-center gap-6 my-auto py-6">
+            <div class="bg-white border-4 border-emerald-400 rounded-3xl p-8 w-full max-w-md text-center shadow-xl flex flex-col items-center gap-6">
+                <div class="text-yellow-500 text-5xl">✨</div>
+                
+                <div class="flex flex-col gap-3">
+                    <p id="confirm-big-text" class="text-3xl md:text-4xl font-extrabold text-emerald-900 my-2 leading-relaxed">
+                        1くみ 5ばん<br><span class="text-emerald-600">「こくご」</span>の べんきょうで<br>かくよ！
+                    </p>
+                </div>
+
+                <div class="w-full flex gap-3 mt-2">
+                    <button onclick="goToPage(2)" class="flex-1 bg-slate-100 hover:bg-slate-200 border-2 border-slate-300 text-slate-700 font-bold text-xl py-4 rounded-2xl active:scale-95 transition">
+                        👈 なおす
+                    </button>
+                    <button onclick="confirmBigOk()" class="action-btn flex-1 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-extrabold text-3xl py-4 rounded-2xl shadow-lg border-2 border-white flex items-center justify-center gap-2 active:scale-95 transition">
+                        <span>👌</span>
+                        <span class="text-2xl">いいよ</span>
                     </button>
                 </div>
             </div>
@@ -514,9 +612,10 @@
             grid.innerHTML = '';
             for (let i = 1; i <= 35; i++) {
                 const btn = document.createElement('button');
-                btn.className = "action-btn bg-amber-100 hover:bg-amber-200 border-2 border-amber-300 text-amber-900 text-2xl font-bold rounded-2xl py-3 flex items-center justify-center shadow-sm active:scale-95 transition";
+                btn.id = `num-btn-${i}`;
+                btn.className = "num-btn action-btn bg-amber-100 hover:bg-amber-200 border-2 border-amber-300 text-amber-900 text-2xl font-bold rounded-2xl py-3 flex items-center justify-center shadow-sm active:scale-95 transition";
                 btn.textContent = i;
-                btn.onclick = () => selectNumberAndNext(i.toString());
+                btn.onclick = () => selectNumber(i.toString());
                 grid.appendChild(btn);
             }
         }
@@ -546,22 +645,87 @@
                 });
         }
 
-        // ステップごとの即時進行ファンクション
-        function selectClassAndNext(clsNum) {
+        // --- クラスえらび（ボタンタップで選択状態にし、「いいよ」で次へ） ---
+        function selectClass(clsNum) {
             selectedClass = `${clsNum}くみ`;
             speakText(`${clsNum}くみ`);
+
+            // ボタンの選択見た目を更新
+            document.querySelectorAll('.class-btn').forEach(btn => {
+                btn.classList.remove('selected-option', 'bg-emerald-200', 'border-emerald-600');
+            });
+            const selBtn = document.getElementById(`class-btn-${clsNum}`);
+            if (selBtn) {
+                selBtn.classList.add('selected-option');
+            }
+
+            // 「いいよ」ボタンを有効化
+            const nextBtn = document.getElementById('class-next-btn');
+            if (nextBtn) {
+                nextBtn.disabled = false;
+                nextBtn.className = "action-btn w-full mt-6 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-extrabold text-2xl rounded-2xl flex items-center justify-center gap-2 shadow-lg active:scale-95 transition border-2 border-white";
+            }
+        }
+
+        function confirmClassNext() {
+            if (!selectedClass) return;
+            speakText('いいよ');
             goToPage(3);
         }
 
-        function selectNumberAndNext(numStr) {
+        // --- ばんごうえらび（ボタンタップで選択状態にし、「いいよ」で次へ） ---
+        function selectNumber(numStr) {
             studentNumber = numStr;
             speakText(`${numStr}ばん`);
+
+            // ボタンの選択見た目を更新
+            document.querySelectorAll('.num-btn').forEach(btn => {
+                btn.classList.remove('selected-option', 'bg-amber-300', 'border-amber-600');
+            });
+            const selBtn = document.getElementById(`num-btn-${numStr}`);
+            if (selBtn) {
+                selBtn.classList.add('selected-option');
+            }
+
+            // 「いいよ」ボタンを有効化
+            const nextBtn = document.getElementById('number-next-btn');
+            if (nextBtn) {
+                nextBtn.disabled = false;
+                nextBtn.className = "action-btn w-full max-w-md py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-extrabold text-2xl rounded-2xl flex items-center justify-center gap-2 shadow-lg active:scale-95 transition border-2 border-white";
+            }
+        }
+
+        function confirmNumberNext() {
+            if (!studentNumber) return;
+            speakText('いいよ');
             goToPage(4);
         }
 
-        function selectSubjectAndNext(subj) {
+        // --- きょうかえらび（ボタンタップで選択状態にし、「いいよ」で次へ） ---
+        function selectSubject(subj) {
             selectedSubject = subj;
             speakText(subj);
+
+            // ボタンの選択見た目を更新
+            document.querySelectorAll('.subj-btn').forEach(btn => {
+                btn.classList.remove('selected-option');
+            });
+            const selBtn = document.getElementById(`subj-btn-${subj}`);
+            if (selBtn) {
+                selBtn.classList.add('selected-option');
+            }
+
+            // 「いいよ」ボタンを有効化
+            const nextBtn = document.getElementById('subj-next-btn');
+            if (nextBtn) {
+                nextBtn.disabled = false;
+                nextBtn.className = "action-btn w-full max-w-md py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-extrabold text-2xl rounded-2xl flex items-center justify-center gap-2 shadow-lg active:scale-95 transition border-2 border-white";
+            }
+        }
+
+        function confirmSubjectNext() {
+            if (!selectedSubject) return;
+            speakText('いいよ');
             goToPage('confirm-info');
         }
 
@@ -581,9 +745,9 @@
             goToPage(7);
         }
 
-        // 大型確認画面での「👌 OK」確定
+        // 大型確認画面での「👌 いいよ」確定
         function confirmBigOk() {
-            speakText('オッケー！');
+            speakText('いいよ！');
             document.getElementById('selected-subject-badge').textContent = selectedSubject;
             goToPage(6);
         }
@@ -618,16 +782,39 @@
             if (pageNum === 1) {
                 speakText('きょうの べんきょうを ふりかえろう！');
             } else if (pageNum === 2) {
+                // クラス切り替え時の初期化
+                selectedClass = '';
+                document.querySelectorAll('.class-btn').forEach(btn => btn.classList.remove('selected-option'));
+                const nextBtn = document.getElementById('class-next-btn');
+                if (nextBtn) {
+                    nextBtn.disabled = true;
+                    nextBtn.className = "action-btn w-full mt-6 py-4 bg-slate-300 text-slate-500 font-extrabold text-2xl rounded-2xl flex items-center justify-center gap-2 shadow-md transition";
+                }
                 speakText('なにぐみ？');
             } else if (pageNum === 3) {
+                // 番号切り替え時の初期化
+                studentNumber = '';
+                document.querySelectorAll('.num-btn').forEach(btn => btn.classList.remove('selected-option'));
+                const nextBtn = document.getElementById('number-next-btn');
+                if (nextBtn) {
+                    nextBtn.disabled = true;
+                    nextBtn.className = "action-btn w-full max-w-md py-4 bg-slate-300 text-slate-500 font-extrabold text-2xl rounded-2xl flex items-center justify-center gap-2 shadow-md transition";
+                }
                 speakText('きみは なんばん？');
             } else if (pageNum === 4) {
+                // 教科切り替え時の初期化
+                selectedSubject = '';
+                document.querySelectorAll('.subj-btn').forEach(btn => btn.classList.remove('selected-option'));
+                const nextBtn = document.getElementById('subj-next-btn');
+                if (nextBtn) {
+                    nextBtn.disabled = true;
+                    nextBtn.className = "action-btn w-full max-w-md py-4 bg-slate-300 text-slate-500 font-extrabold text-2xl rounded-2xl flex items-center justify-center gap-2 shadow-md transition";
+                }
                 speakText('なんの べんきょう？');
             } else if (pageNum === 'confirm-info') {
-                const bigText = `${selectedClass} ${studentNumber}ばん？`;
-                document.getElementById('confirm-big-text').textContent = bigText;
-                document.getElementById('confirm-subject-badge-big').textContent = selectedSubject;
-                speakText(`${selectedClass} ${studentNumber}ばん ${selectedSubject}？`);
+                const bigText = `${selectedClass} ${studentNumber}ばん<br><span class="text-emerald-600">「${selectedSubject}」</span>の べんきょうで<br>かくよ！`;
+                document.getElementById('confirm-big-text').innerHTML = bigText;
+                speakText(`${selectedClass} ${studentNumber}ばん ${selectedSubject}の べんきょうで かくよ`);
             } else if (pageNum === 6) {
                 speakText('なにについて かく？');
             } else if (pageNum === 7) {
