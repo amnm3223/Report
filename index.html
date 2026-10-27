@@ -82,6 +82,16 @@
                 <p class="text-3xl font-bold text-emerald-900 mt-2">きょうの べんきょうを<br>ふりかえろう！</p>
             </div>
 
+            <!-- マイクきょかボタン -->
+            <button id="mic-perm-btn" onclick="requestMicPermission()"
+                class="bg-rose-100 hover:bg-rose-200 text-rose-800 border-2 border-rose-300 font-bold px-5 py-3 rounded-2xl flex items-center gap-3 shadow-sm active:scale-95 transition">
+                <i class="fa-solid fa-microphone text-rose-600 text-2xl"></i>
+                <div class="text-left">
+                    <div class="text-sm font-bold" id="mic-perm-status-text">🎤 さいしょに マイクを つかう じゅんび（きょか）</div>
+                    <div class="text-xs text-rose-600">（おしゃべり にゅうりょくを つかうひとは おしてね）</div>
+                </div>
+            </button>
+
             <!-- スタートボタン -->
             <button onclick="goToPage(2)"
                 class="action-btn w-full max-w-md py-8 px-8 bg-gradient-to-r from-emerald-400 to-teal-500 text-white font-bold text-3xl md:text-4xl rounded-3xl flex items-center justify-center gap-4 hover:brightness-105 transition transform active:scale-95 shadow-xl border-4 border-white">
@@ -108,7 +118,8 @@
                         <button onclick="filterStudentSubject('こくご')" id="s-tab-こくご" class="action-btn px-3.5 py-2 rounded-2xl font-bold bg-rose-100 text-rose-800 border border-rose-300 whitespace-nowrap">📖 こくご</button>
                         <button onclick="filterStudentSubject('さんすう')" id="s-tab-さんすう" class="action-btn px-3.5 py-2 rounded-2xl font-bold bg-sky-100 text-sky-800 border border-sky-300 whitespace-nowrap">📐 さんすう</button>
                         <button onclick="filterStudentSubject('せいかつ')" id="s-tab-せいかつ" class="action-btn px-3.5 py-2 rounded-2xl font-bold bg-amber-100 text-amber-800 border border-amber-300 whitespace-nowrap">🌱 せいかつ</button>
-                        <button onclick="filterStudentSubject('おんがく')" id="s-tab-おんがく" class="action-btn px-3.5 py-2 rounded-2xl font-bold bg-purple-100 text-purple-800 border border-purple-300 whitespace-nowrap">🎵 おんがく</button>
+                        <button onclick="filterStudentSubject('おんがく')" id="s-tab-おんがく" class="action-btn px-3.5 py-2 rounded-2xl font-bold bg-purple-100 text-purple-800 border border-purple-300 whitespace-nowrap">🎵 おん发がく</button>
+                        <button onclick="filterStudentSubject('ずこう')" id="s-tab-ずこう" class="action-btn px-3.5 py-2 rounded-2xl font-bold bg-orange-100 text-orange-800 border border-orange-300 whitespace-nowrap">🎨 ずこう</button>
                     </div>
                 </div>
 
@@ -120,103 +131,111 @@
             </div>
         </section>
 
-        <!-- ================= PAGE 2: クラス・ばんごう・きょうかえらび ================= -->
-        <section id="page-2" class="page-view w-full hidden flex-col items-center gap-6">
-            
-            <!-- くみ えらび -->
+        <!-- ================= PAGE 2: クラスえらび ================= -->
+        <section id="page-2" class="page-view w-full hidden flex-col items-center gap-6 my-auto">
             <div class="text-center my-1 flex flex-col items-center gap-1 w-full max-w-md">
                 <button onclick="speakText('なにぐみ？')" class="bg-amber-100 hover:bg-amber-200 text-amber-900 border-2 border-amber-300 px-4 py-1.5 rounded-full font-bold text-sm flex items-center gap-2 shadow-sm">
                     <i class="fa-solid fa-volume-high text-amber-600"></i>
-                    <span>もういちど きく</span>
+                    <span>きく</span>
                 </button>
-                <h2 class="text-2xl font-bold text-emerald-900 mt-1">なにぐみ？</h2>
+                <h2 class="text-3xl font-bold text-emerald-900 mt-2">なにぐみ？</h2>
                 
-                <div class="grid grid-cols-2 gap-3 w-full mt-2">
-                    <button id="class-btn-1" onclick="selectClassOption('1')" class="class-btn action-btn bg-emerald-50 border-4 border-emerald-300 text-emerald-900 rounded-2xl p-4 flex items-center justify-center gap-2 text-2xl font-bold">
+                <div class="grid grid-cols-2 gap-4 w-full mt-4">
+                    <button id="class-btn-1" onclick="selectClassAndNext('1')" class="class-btn action-btn bg-emerald-50 hover:bg-emerald-100 border-4 border-emerald-300 text-emerald-900 rounded-3xl p-8 flex flex-col items-center justify-center gap-2 text-3xl font-extrabold shadow-md">
+                        <span>🏫</span>
                         <span>1くみ</span>
                     </button>
-                    <button id="class-btn-2" onclick="selectClassOption('2')" class="class-btn action-btn bg-emerald-50 border-4 border-emerald-300 text-emerald-900 rounded-2xl p-4 flex items-center justify-center gap-2 text-2xl font-bold">
+                    <button id="class-btn-2" onclick="selectClassAndNext('2')" class="class-btn action-btn bg-emerald-50 hover:bg-emerald-100 border-4 border-emerald-300 text-emerald-900 rounded-3xl p-8 flex flex-col items-center justify-center gap-2 text-3xl font-extrabold shadow-md">
+                        <span>🏫</span>
                         <span>2くみ</span>
                     </button>
                 </div>
             </div>
+        </section>
 
-            <!-- ばんごう えらび -->
+        <!-- ================= PAGE 3: ばんごうえらび (1〜35) ================= -->
+        <section id="page-3" class="page-view w-full hidden flex-col items-center gap-4">
             <div class="text-center my-1 flex flex-col items-center gap-1 w-full max-w-md">
                 <button onclick="speakText('きみは なんばん？')" class="bg-amber-100 hover:bg-amber-200 text-amber-900 border-2 border-amber-300 px-4 py-1.5 rounded-full font-bold text-sm flex items-center gap-2 shadow-sm">
                     <i class="fa-solid fa-volume-high text-amber-600"></i>
-                    <span>もういちど きく</span>
+                    <span>きく</span>
                 </button>
-                <h2 class="text-2xl font-bold text-emerald-900 mt-1">きみは なんばん？</h2>
+                <h2 class="text-3xl font-bold text-emerald-900 mt-1">きみは なんばん？</h2>
             </div>
 
-            <!-- すうじせんたくボード -->
-            <div class="w-full max-w-md bg-white p-4 rounded-3xl border-3 border-emerald-300 shadow-sm flex flex-col items-center gap-3">
-                <div class="flex items-center justify-center gap-3 w-full bg-emerald-50 py-2 px-4 rounded-2xl border-2 border-emerald-200">
-                    <span class="text-xl font-bold text-emerald-900">ばんごう：</span>
-                    <span id="selected-number-display" class="text-3xl font-extrabold text-emerald-600 min-w-[3rem] text-center">―</span>
-                    <span class="text-xl font-bold text-emerald-900">ばん</span>
-                    <button onclick="clearStudentNumber()" class="ml-auto text-xs bg-rose-100 text-rose-600 font-bold px-3 py-1.5 rounded-full hover:bg-rose-200">
-                        <i class="fa-solid fa-eraser"></i> けす
-                    </button>
-                </div>
-
-                <!-- 0~9テンキーボード -->
-                <div class="grid grid-cols-5 gap-2 w-full">
-                    <button onclick="appendStudentNumber('1')" class="action-btn bg-amber-100 border-2 border-amber-300 text-amber-900 text-2xl font-bold rounded-2xl p-3 shadow-sm active:scale-95">1</button>
-                    <button onclick="appendStudentNumber('2')" class="action-btn bg-amber-100 border-2 border-amber-300 text-amber-900 text-2xl font-bold rounded-2xl p-3 shadow-sm active:scale-95">2</button>
-                    <button onclick="appendStudentNumber('3')" class="action-btn bg-amber-100 border-2 border-amber-300 text-amber-900 text-2xl font-bold rounded-2xl p-3 shadow-sm active:scale-95">3</button>
-                    <button onclick="appendStudentNumber('4')" class="action-btn bg-amber-100 border-2 border-amber-300 text-amber-900 text-2xl font-bold rounded-2xl p-3 shadow-sm active:scale-95">4</button>
-                    <button onclick="appendStudentNumber('5')" class="action-btn bg-amber-100 border-2 border-amber-300 text-amber-900 text-2xl font-bold rounded-2xl p-3 shadow-sm active:scale-95">5</button>
-                    <button onclick="appendStudentNumber('6')" class="action-btn bg-amber-100 border-2 border-amber-300 text-amber-900 text-2xl font-bold rounded-2xl p-3 shadow-sm active:scale-95">6</button>
-                    <button onclick="appendStudentNumber('7')" class="action-btn bg-amber-100 border-2 border-amber-300 text-amber-900 text-2xl font-bold rounded-2xl p-3 shadow-sm active:scale-95">7</button>
-                    <button onclick="appendStudentNumber('8')" class="action-btn bg-amber-100 border-2 border-amber-300 text-amber-900 text-2xl font-bold rounded-2xl p-3 shadow-sm active:scale-95">8</button>
-                    <button onclick="appendStudentNumber('9')" class="action-btn bg-amber-100 border-2 border-amber-300 text-amber-900 text-2xl font-bold rounded-2xl p-3 shadow-sm active:scale-95">9</button>
-                    <button onclick="appendStudentNumber('0')" class="action-btn bg-amber-100 border-2 border-amber-300 text-amber-900 text-2xl font-bold rounded-2xl p-3 shadow-sm active:scale-95">0</button>
-                </div>
+            <!-- 1〜35のばんごうグリッドボタン -->
+            <div id="number-grid" class="grid grid-cols-5 md:grid-cols-7 gap-2.5 w-full max-w-lg bg-white p-4 rounded-3xl border-3 border-emerald-300 shadow-sm">
+                <!-- JSで1〜35のボタンを自動生成 -->
             </div>
+        </section>
 
-            <!-- きょうか えらび -->
+        <!-- ================= PAGE 4: きょうかえらび ================= -->
+        <section id="page-4" class="page-view w-full hidden flex-col items-center gap-4">
             <div class="text-center mt-2 flex flex-col items-center gap-1">
                 <button onclick="speakText('なんのべんきょう？')" class="bg-amber-100 hover:bg-amber-200 text-amber-900 border-2 border-amber-300 px-4 py-1.5 rounded-full font-bold text-sm flex items-center gap-2 shadow-sm">
                     <i class="fa-solid fa-volume-high text-amber-600"></i>
-                    <span>もういちど きく</span>
+                    <span>きく</span>
                 </button>
-                <h2 class="text-2xl font-bold text-emerald-900 mt-1">なんの べんきょう？</h2>
+                <h2 class="text-3xl font-bold text-emerald-900 mt-1">なんの べんきょう？</h2>
             </div>
 
-            <div class="grid grid-cols-2 gap-4 w-full max-w-md">
-                <button id="subj-btn-こくご" onclick="selectSubjectOption('こくご')" class="subj-btn action-btn bg-rose-50 border-4 border-rose-300 text-rose-800 rounded-3xl p-6 flex flex-col items-center justify-center gap-2">
-                    <span class="text-5xl">📖</span>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-md">
+                <button id="subj-btn-こくご" onclick="selectSubjectAndNext('こくご')" class="subj-btn action-btn bg-rose-50 border-4 border-rose-300 text-rose-800 rounded-3xl p-5 flex flex-col items-center justify-center gap-2">
+                    <span class="text-4xl">📖</span>
                     <span class="text-2xl font-bold">こくご</span>
                 </button>
 
-                <button id="subj-btn-さんすう" onclick="selectSubjectOption('さんすう')" class="subj-btn action-btn bg-sky-50 border-4 border-sky-300 text-sky-800 rounded-3xl p-6 flex flex-col items-center justify-center gap-2">
-                    <span class="text-5xl">📐</span>
+                <button id="subj-btn-さんすう" onclick="selectSubjectAndNext('さんすう')" class="subj-btn action-btn bg-sky-50 border-4 border-sky-300 text-sky-800 rounded-3xl p-5 flex flex-col items-center justify-center gap-2">
+                    <span class="text-4xl">📐</span>
                     <span class="text-2xl font-bold">さんすう</span>
                 </button>
 
-                <button id="subj-btn-せいかつ" onclick="selectSubjectOption('せいかつ')" class="subj-btn action-btn bg-amber-50 border-4 border-amber-300 text-amber-800 rounded-3xl p-6 flex flex-col items-center justify-center gap-2">
-                    <span class="text-5xl">🌱</span>
+                <button id="subj-btn-せいかつ" onclick="selectSubjectAndNext('せいかつ')" class="subj-btn action-btn bg-amber-50 border-4 border-amber-300 text-amber-800 rounded-3xl p-5 flex flex-col items-center justify-center gap-2">
+                    <span class="text-4xl">🌱</span>
                     <span class="text-2xl font-bold">せいかつ</span>
                 </button>
 
-                <button id="subj-btn-おんがく" onclick="selectSubjectOption('おんがく')" class="subj-btn action-btn bg-purple-50 border-4 border-purple-300 text-purple-800 rounded-3xl p-6 flex flex-col items-center justify-center gap-2">
-                    <span class="text-5xl">🎵</span>
+                <button id="subj-btn-おんがく" onclick="selectSubjectAndNext('おんがく')" class="subj-btn action-btn bg-purple-50 border-4 border-purple-300 text-purple-800 rounded-3xl p-5 flex flex-col items-center justify-center gap-2">
+                    <span class="text-4xl">🎵</span>
                     <span class="text-2xl font-bold">おんがく</span>
                 </button>
-            </div>
 
-            <!-- けっていボタン -->
-            <button id="confirm-subj-btn" onclick="confirmSubject()" disabled
-                class="action-btn w-full max-w-md py-4 bg-slate-300 text-slate-500 font-bold text-2xl rounded-2xl flex items-center justify-center gap-2 transition cursor-not-allowed mt-2">
-                <i class="fa-solid fa-circle-check"></i>
-                <span>けってい</span>
-            </button>
+                <button id="subj-btn-ずこう" onclick="selectSubjectAndNext('ずこう')" class="subj-btn action-btn bg-orange-50 border-4 border-orange-300 text-orange-800 rounded-3xl p-5 flex flex-col items-center justify-center gap-2 col-span-2 md:col-span-1">
+                    <span class="text-4xl">🎨</span>
+                    <span class="text-2xl font-bold">ずこう</span>
+                </button>
+            </div>
         </section>
 
-        <!-- ================= PAGE 3: テーマえらび ================= -->
-        <section id="page-3" class="page-view w-full hidden flex-col items-center gap-4">
+        <!-- ================= PAGE 5: おおきなかくにん画面 (◯くみ ◯ばん ◯◯？) ================= -->
+        <section id="page-confirm-info" class="page-view w-full hidden flex-col items-center gap-6 my-auto py-6">
+            <div class="bg-white border-4 border-emerald-400 rounded-3xl p-8 w-full max-w-md text-center shadow-xl flex flex-col items-center gap-6">
+                <div class="text-yellow-500 text-5xl">✨</div>
+                
+                <div class="flex flex-col gap-2">
+                    <p class="text-xl font-bold text-slate-600">あなたの ふりかえりは</p>
+                    <p id="confirm-big-text" class="text-4xl md:text-5xl font-extrabold text-emerald-800 my-2 leading-tight">
+                        1くみ 5ばん？
+                    </p>
+                    <span id="confirm-subject-badge-big" class="inline-block bg-emerald-500 text-white font-bold text-2xl px-6 py-2 rounded-full self-center shadow-sm">
+                        こくご
+                    </span>
+                </div>
+
+                <div class="w-full flex gap-3 mt-4">
+                    <button onclick="goToPage(2)" class="flex-1 bg-slate-100 hover:bg-slate-200 border-2 border-slate-300 text-slate-700 font-bold text-xl py-4 rounded-2xl active:scale-95 transition">
+                        👈 なおす
+                    </button>
+                    <button onclick="confirmBigOk()" class="action-btn flex-1 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-extrabold text-4xl py-4 rounded-2xl shadow-lg border-2 border-white flex items-center justify-center gap-2 active:scale-95 transition">
+                        <span>👌</span>
+                        <span class="text-2xl">これでOK</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 6: テーマえらび ================= -->
+        <section id="page-6" class="page-view w-full hidden flex-col items-center gap-4">
             <div class="text-center my-1 flex flex-col items-center gap-2">
                 <div class="flex items-center gap-2">
                     <span id="selected-subject-badge" class="bg-emerald-500 text-white font-bold text-sm px-4 py-1 rounded-full">こくご</span>
@@ -229,42 +248,35 @@
             </div>
 
             <div class="flex flex-col gap-3 w-full max-w-md">
-                <button id="topic-btn-たのしかったこと" onclick="selectTopicOption('たのしかったこと')" class="topic-btn action-btn bg-amber-50 border-3 border-amber-300 text-amber-900 rounded-2xl p-4 flex items-center gap-4 text-left">
+                <button id="topic-btn-たのしかったこと" onclick="selectTopicAndNext('たのしかったこと')" class="topic-btn action-btn bg-amber-50 border-3 border-amber-300 text-amber-900 rounded-2xl p-4 flex items-center gap-4 text-left">
                     <span class="text-4xl">😊</span>
                     <span class="text-2xl font-bold">たのしかったこと</span>
                 </button>
 
-                <button id="topic-btn-わかったこと" onclick="selectTopicOption('わかったこと')" class="topic-btn action-btn bg-emerald-50 border-3 border-emerald-300 text-emerald-900 rounded-2xl p-4 flex items-center gap-4 text-left">
+                <button id="topic-btn-わかったこと" onclick="selectTopicAndNext('わかったこと')" class="topic-btn action-btn bg-emerald-50 border-3 border-emerald-300 text-emerald-900 rounded-2xl p-4 flex items-center gap-4 text-left">
                     <span class="text-4xl">💡</span>
                     <span class="text-2xl font-bold">わかったこと</span>
                 </button>
 
-                <button id="topic-btn-わからなかったこと" onclick="selectTopicOption('わからなかったこと')" class="topic-btn action-btn bg-blue-50 border-3 border-blue-300 text-blue-900 rounded-2xl p-4 flex items-center gap-4 text-left">
+                <button id="topic-btn-わからなかったこと" onclick="selectTopicAndNext('わからなかったこと')" class="topic-btn action-btn bg-blue-50 border-3 border-blue-300 text-blue-900 rounded-2xl p-4 flex items-center gap-4 text-left">
                     <span class="text-4xl">🤔</span>
                     <span class="text-2xl font-bold">わからなかったこと</span>
                 </button>
 
-                <button id="topic-btn-かんがえがかわったこと" onclick="selectTopicOption('かんがえがかわったこと')" class="topic-btn action-btn bg-purple-50 border-3 border-purple-300 text-purple-800 rounded-2xl p-4 flex items-center gap-4 text-left">
+                <button id="topic-btn-かんがえがかわったこと" onclick="selectTopicAndNext('かんがえがかわったこと')" class="topic-btn action-btn bg-purple-50 border-3 border-purple-300 text-purple-800 rounded-2xl p-4 flex items-center gap-4 text-left">
                     <span class="text-4xl">✨</span>
                     <span class="text-2xl font-bold">かんがえが かわったこと</span>
                 </button>
 
-                <button id="topic-btn-もっとしりたいこと" onclick="selectTopicOption('もっとしりたいこと')" class="topic-btn action-btn bg-rose-50 border-3 border-rose-300 text-rose-900 rounded-2xl p-4 flex items-center gap-4 text-left">
+                <button id="topic-btn-もっとしりたいこと" onclick="selectTopicAndNext('もっとしりたいこと')" class="topic-btn action-btn bg-rose-50 border-3 border-rose-300 text-rose-900 rounded-2xl p-4 flex items-center gap-4 text-left">
                     <span class="text-4xl">🚀</span>
                     <span class="text-2xl font-bold">もっと しりたいこと</span>
                 </button>
             </div>
-
-            <!-- けっていボタン -->
-            <button id="confirm-topic-btn" onclick="confirmTopic()" disabled
-                class="action-btn w-full max-w-md py-4 bg-slate-300 text-slate-500 font-bold text-2xl rounded-2xl flex items-center justify-center gap-2 transition cursor-not-allowed mt-2">
-                <i class="fa-solid fa-circle-check"></i>
-                <span>けってい</span>
-            </button>
         </section>
 
-        <!-- ================= PAGE 4: おしゃべり にゅうりょく がめん ================= -->
-        <section id="page-4" class="page-view w-full hidden flex-col items-center gap-5">
+        <!-- ================= PAGE 7: おしゃべり にゅうりょく がめん ================= -->
+        <section id="page-7" class="page-view w-full hidden flex-col items-center gap-5">
             <!-- せんたくされたせっていのひょうじヘッダー -->
             <div class="w-full bg-emerald-100 border-2 border-emerald-300 rounded-2xl p-3 flex items-center justify-between">
                 <div class="flex items-center gap-2 flex-wrap">
@@ -291,13 +303,15 @@
 
                 <!-- はなしたことばのひょうじらん -->
                 <div class="w-full relative">
-                    <div class="flex justify-between items-center mb-1">
-                        <span class="text-sm font-bold text-slate-500">ききとった ことば:</span>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-bold text-slate-500">ききとった ことば (ひらがな):</span>
                         <div class="flex gap-2">
-                            <button onclick="speakInputText()" class="text-xs bg-emerald-100 text-emerald-700 font-bold px-3 py-1 rounded-full hover:bg-emerald-200 flex items-center gap-1">
-                                <i class="fa-solid fa-volume-high"></i> きく
+                            <!-- 自分で聞けるよんであげるボタン -->
+                            <button onclick="speakInputText()" class="action-btn text-sm bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold px-4 py-1.5 rounded-full shadow-sm flex items-center gap-1.5 border border-amber-300">
+                                <i class="fa-solid fa-volume-high text-base"></i>
+                                <span>よんであげる</span>
                             </button>
-                            <button onclick="clearText()" class="text-xs bg-rose-100 text-rose-600 font-bold px-3 py-1 rounded-full hover:bg-rose-200">
+                            <button onclick="clearText()" class="text-xs bg-rose-100 text-rose-600 font-bold px-3 py-1.5 rounded-full hover:bg-rose-200">
                                 <i class="fa-solid fa-trash mr-1"></i> けす
                             </button>
                         </div>
@@ -316,19 +330,27 @@
             </div>
         </section>
 
-        <!-- ================= PAGE 5: せんせいよう かんりダッシュボード ================= -->
+        <!-- ================= PAGE 8: せんせいよう かんりダッシュボード ================= -->
         <section id="page-teacher" class="page-view w-full hidden flex-col items-center gap-4">
             <div class="w-full bg-slate-800 text-white p-4 rounded-3xl shadow-md flex flex-col gap-3">
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center flex-wrap gap-2">
                     <h2 class="text-xl font-bold flex items-center gap-2">
                         <i class="fa-solid fa-chalkboard-user text-yellow-400"></i>
                         <span>じどうの ふりかえり いちらん（せんせいよう）</span>
                     </h2>
-                    <button onclick="goToPage(1)" class="text-xs bg-slate-600 hover:bg-slate-500 px-3 py-1.5 rounded-full font-bold">
-                        じどうよう がめんへ もどる
-                    </button>
+                    <div class="flex gap-2 flex-wrap">
+                        <button onclick="copyForSpreadsheet()" class="text-xs bg-teal-600 hover:bg-teal-500 px-3 py-1.5 rounded-full font-bold flex items-center gap-1 text-white shadow">
+                            <i class="fa-solid fa-file-excel"></i> スプレッドシート用にコピー
+                        </button>
+                        <button onclick="downloadCSV()" class="text-xs bg-emerald-600 hover:bg-emerald-500 px-3 py-1.5 rounded-full font-bold flex items-center gap-1 text-white shadow">
+                            <i class="fa-solid fa-file-csv"></i> CSV出力
+                        </button>
+                        <button onclick="goToPage(1)" class="text-xs bg-slate-600 hover:bg-slate-500 px-3 py-1.5 rounded-full font-bold">
+                            じどうよう がめんへ もどる
+                        </button>
+                    </div>
                 </div>
-                <p class="text-xs text-slate-300">クラスぜんいんの ていしゅつした ふりかえりを きょうかごとに しぼりこんで かくにんできます。</p>
+                <p class="text-xs text-slate-300">クラスぜんいんの ていしゅつした ふりかえりを きょうかごとに しぼりこんで かくにんできます。「スプレッドシート用にコピー」を押してGoogleスプレッドシートに直接貼り付け（Ctrl+V）できます。</p>
                 
                 <!-- きょうかフィルタータブ -->
                 <div class="flex gap-1.5 overflow-x-auto pb-1 text-xs md:text-sm">
@@ -337,6 +359,7 @@
                     <button onclick="filterTeacherSubject('さんすう')" id="t-tab-さんすう" class="px-3 py-1.5 rounded-xl font-bold bg-slate-700 text-slate-300 whitespace-nowrap">さんすう</button>
                     <button onclick="filterTeacherSubject('せいかつ')" id="t-tab-せいかつ" class="px-3 py-1.5 rounded-xl font-bold bg-slate-700 text-slate-300 whitespace-nowrap">せいかつ</button>
                     <button onclick="filterTeacherSubject('おんがく')" id="t-tab-おんがく" class="px-3 py-1.5 rounded-xl font-bold bg-slate-700 text-slate-300 whitespace-nowrap">おんがく</button>
+                    <button onclick="filterTeacherSubject('ずこう')" id="t-tab-ずこう" class="px-3 py-1.5 rounded-xl font-bold bg-slate-700 text-slate-300 whitespace-nowrap">ずこう</button>
                 </div>
             </div>
 
@@ -404,12 +427,10 @@
         let studentNumber = '';
         let selectedSubject = '';
         let selectedTopic = '';
-        let tempClass = '';
-        let tempSubject = '';
-        let tempTopic = '';
         let activeTeacherFilter = 'all';
         let activeStudentFilter = 'all';
         let selectedCardForStamp = null;
+        let isMicApproved = false;
 
         // 漢字からひらがな変換用ライブラリ (kuromoji)
         let tokenizer = null;
@@ -425,7 +446,7 @@
             });
         }
 
-        // テキスト内の漢字をすべてひらがなに変換する関数
+        // テキスト内の漢字をすべてひらがなに変換し、わかち書き（スペース区切り）で返す関数
         function convertToHiragana(text) {
             if (!text) return "";
             if (!tokenizer) {
@@ -433,12 +454,11 @@
             }
             try {
                 const tokens = tokenizer.tokenize(text);
+                // 各単語（トークン）をひらがなに変換しスペースで連結してわかち書きにする
                 return tokens.map(token => {
-                    if (token.reading) {
-                        return kataToHira(token.reading);
-                    }
-                    return kataToHira(token.surface_form);
-                }).join('');
+                    let word = token.reading ? token.reading : token.surface_form;
+                    return kataToHira(word);
+                }).filter(w => w.trim().length > 0).join(' ');
             } catch (e) {
                 console.error("Hiragana conversion error:", e);
                 return kataToHira(text);
@@ -451,6 +471,20 @@
                 var chr = match.charCodeAt(0) - 0x60;
                 return String.fromCharCode(chr);
             });
+        }
+
+        // HTMLエスケープ処理
+        function escapeHTML(str) {
+            if (!str) return '';
+            return str.replace(/[&<>'"]/g, 
+                tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag] || tag)
+            );
         }
 
         // 音声合成 (TTS) 関数
@@ -467,45 +501,98 @@
         // --- 初期化 ---
         window.onload = function() {
             initSpeechRecognition();
+            renderNumberGrid();
             loadCards();
             setTimeout(() => {
                 speakText('きょうの べんきょうを ふりかえろう！');
             }, 600);
         };
 
-        // クラス選択コントロール
-        function selectClassOption(clsNum) {
-            tempClass = clsNum;
+        // 1〜35のばんごうボタンの動的生成
+        function renderNumberGrid() {
+            const grid = document.getElementById('number-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            for (let i = 1; i <= 35; i++) {
+                const btn = document.createElement('button');
+                btn.className = "action-btn bg-amber-100 hover:bg-amber-200 border-2 border-amber-300 text-amber-900 text-2xl font-bold rounded-2xl py-3 flex items-center justify-center shadow-sm active:scale-95 transition";
+                btn.textContent = i;
+                btn.onclick = () => selectNumberAndNext(i.toString());
+                grid.appendChild(btn);
+            }
+        }
+
+        // マイク事前認証関数
+        function requestMicPermission() {
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                showModal('⚠️', 'このブラウザは マイクに たいのうしていません。');
+                return;
+            }
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(function(stream) {
+                    isMicApproved = true;
+                    // トラックをすぐ停止してマイクを一旦解放
+                    stream.getTracks().forEach(track => track.stop());
+                    const statusBtn = document.getElementById('mic-perm-btn');
+                    const statusText = document.getElementById('mic-perm-status-text');
+                    if (statusBtn && statusText) {
+                        statusBtn.className = "bg-emerald-100 border-2 border-emerald-400 text-emerald-800 font-bold px-5 py-3 rounded-2xl flex items-center gap-3 shadow-sm";
+                        statusText.innerHTML = "✅ マイクの じゅんびが できたよ！";
+                    }
+                    speakText('マイクの じゅんびが できたよ！');
+                })
+                .catch(function(err) {
+                    console.error('Mic error:', err);
+                    showModal('🎤', 'マイクの きょかが できませんでした。');
+                });
+        }
+
+        // ステップごとの即時進行ファンクション
+        function selectClassAndNext(clsNum) {
+            selectedClass = `${clsNum}くみ`;
             speakText(`${clsNum}くみ`);
-            updateSubjectUI();
+            goToPage(3);
         }
 
-        // 番号ボタン入力コントロール
-        function appendStudentNumber(numStr) {
-            if (studentNumber.length < 2) {
-                studentNumber += numStr;
-                speakText(numStr);
-                updateStudentNumberUI();
-            }
+        function selectNumberAndNext(numStr) {
+            studentNumber = numStr;
+            speakText(`${numStr}ばん`);
+            goToPage(4);
         }
 
-        function clearStudentNumber() {
-            studentNumber = '';
-            updateStudentNumberUI();
+        function selectSubjectAndNext(subj) {
+            selectedSubject = subj;
+            speakText(subj);
+            goToPage('confirm-info');
         }
 
-        function updateStudentNumberUI() {
-            const display = document.getElementById('selected-number-display');
-            if (display) {
-                display.textContent = studentNumber || '―';
-            }
-            updateSubjectUI();
+        function selectTopicAndNext(topicKey) {
+            let displayTopic = topicKey;
+            if (topicKey === 'かんがえがかわったこと') displayTopic = 'かんがえが かわったこと';
+            if (topicKey === 'もっとしりたいこと') displayTopic = 'もっと しりたいこと';
+            selectedTopic = displayTopic;
+
+            speakText(displayTopic);
+
+            document.getElementById('input-class-tag').textContent = `1ねん${selectedClass}`;
+            document.getElementById('input-number-tag').textContent = `${studentNumber}ばん`;
+            document.getElementById('input-subject-tag').textContent = selectedSubject;
+            document.getElementById('input-topic-tag').textContent = selectedTopic;
+
+            goToPage(7);
+        }
+
+        // 大型確認画面での「👌 OK」確定
+        function confirmBigOk() {
+            speakText('オッケー！');
+            document.getElementById('selected-subject-badge').textContent = selectedSubject;
+            goToPage(6);
         }
 
         // 画面遷移コントロール
         function goToPage(pageNum) {
             currentPage = pageNum;
-            const pages = [1, 2, 3, 4, 'teacher'];
+            const pages = [1, 2, 3, 4, 'confirm-info', 6, 7, 'teacher'];
             pages.forEach(p => {
                 const page = document.getElementById(`page-${p}`);
                 if (!page) return;
@@ -528,20 +615,23 @@
                 backBtn.classList.remove('flex');
             }
 
-            // ページごとの音声ガイダンスと状態リセット
+            // ページごとの音声ガイダンスと初期状態
             if (pageNum === 1) {
                 speakText('きょうの べんきょうを ふりかえろう！');
             } else if (pageNum === 2) {
-                tempClass = '';
-                tempSubject = '';
-                studentNumber = '';
-                updateStudentNumberUI();
                 speakText('なにぐみ？');
             } else if (pageNum === 3) {
-                tempTopic = '';
-                updateTopicUI();
-                speakText('なにについて かく？');
+                speakText('きみは なんばん？');
             } else if (pageNum === 4) {
+                speakText('なんの べんきょう？');
+            } else if (pageNum === 'confirm-info') {
+                const bigText = `${selectedClass} ${studentNumber}ばん？`;
+                document.getElementById('confirm-big-text').textContent = bigText;
+                document.getElementById('confirm-subject-badge-big').textContent = selectedSubject;
+                speakText(`${selectedClass} ${studentNumber}ばん ${selectedSubject}？`);
+            } else if (pageNum === 6) {
+                speakText('なにについて かく？');
+            } else if (pageNum === 7) {
                 document.getElementById('text-input').value = '';
                 speakText('ここをおして おはなししてね！');
             } else if (pageNum === 'teacher') {
@@ -555,6 +645,12 @@
         function goBack() {
             if (currentPage === 'teacher') {
                 goToPage(1);
+            } else if (currentPage === 'confirm-info') {
+                goToPage(4);
+            } else if (currentPage === 6) {
+                goToPage('confirm-info');
+            } else if (currentPage === 7) {
+                goToPage(6);
             } else if (currentPage > 1) {
                 goToPage(currentPage - 1);
             }
@@ -580,100 +676,17 @@
             }
         }
 
-        // 2ページ目：教科選択（一時選択）
-        function selectSubjectOption(subject) {
-            tempSubject = subject;
-            speakText(subject);
-            updateSubjectUI();
+        // カスタムモーダル表示
+        function showModal(icon, message) {
+            document.getElementById('modal-icon').textContent = icon;
+            document.getElementById('modal-message').textContent = message;
+            document.getElementById('custom-modal').classList.remove('hidden');
+            document.getElementById('custom-modal').classList.add('flex');
         }
 
-        function updateSubjectUI() {
-            // クラスボタンの見た目更新
-            [1, 2].forEach(c => {
-                const btn = document.getElementById(`class-btn-${c}`);
-                if (!btn) return;
-                if (c.toString() === tempClass) {
-                    btn.classList.add('selected-option');
-                } else {
-                    btn.classList.remove('selected-option');
-                }
-            });
-
-            // 教科ボタンの見た目更新
-            ['こくご', 'さんすう', 'せいかつ', 'おんがく'].forEach(s => {
-                const btn = document.getElementById(`subj-btn-${s}`);
-                if (!btn) return;
-                if (s === tempSubject) {
-                    btn.classList.add('selected-option');
-                } else {
-                    btn.classList.remove('selected-option');
-                }
-            });
-
-            const confirmBtn = document.getElementById('confirm-subj-btn');
-            // クラス・番号・教科の3つが揃ったら決定可能
-            if (tempClass !== '' && tempSubject !== '' && studentNumber !== '') {
-                confirmBtn.disabled = false;
-                confirmBtn.className = "action-btn w-full max-w-md py-5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold text-3xl rounded-2xl flex items-center justify-center gap-3 transition active:scale-95 shadow-lg mt-2";
-            } else {
-                confirmBtn.disabled = true;
-                confirmBtn.className = "action-btn w-full max-w-md py-4 bg-slate-300 text-slate-500 font-bold text-2xl rounded-2xl flex items-center justify-center gap-2 transition cursor-not-allowed mt-2";
-            }
-        }
-
-        function confirmSubject() {
-            if (!tempClass || !tempSubject || studentNumber === '') return;
-            selectedClass = `${tempClass}くみ`;
-            selectedSubject = tempSubject;
-            document.getElementById('selected-subject-badge').textContent = selectedSubject;
-            goToPage(3);
-        }
-
-        // 3ページ目：テーマ選択（一時選択）
-        function selectTopicOption(topicKey) {
-            tempTopic = topicKey;
-            let speakMsg = topicKey;
-            if (topicKey === 'かんがえがかわったこと') speakMsg = 'かんがえが かわったこと';
-            if (topicKey === 'もっとしりたいこと') speakMsg = 'もっと しりたいこと';
-            speakText(speakMsg);
-
-            updateTopicUI();
-        }
-
-        function updateTopicUI() {
-            const topics = ['たのしかったこと', 'わかったこと', 'わからなかったこと', 'かんがえがかわったこと', 'もっとしりたいこと'];
-            topics.forEach(t => {
-                const btn = document.getElementById(`topic-btn-${t}`);
-                if (!btn) return;
-                if (t === tempTopic) {
-                    btn.classList.add('selected-option');
-                } else {
-                    btn.classList.remove('selected-option');
-                }
-            });
-
-            const confirmBtn = document.getElementById('confirm-topic-btn');
-            if (tempTopic) {
-                confirmBtn.disabled = false;
-                confirmBtn.className = "action-btn w-full max-w-md py-5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold text-3xl rounded-2xl flex items-center justify-center gap-3 transition active:scale-95 shadow-lg mt-2";
-            } else {
-                confirmBtn.disabled = true;
-                confirmBtn.className = "action-btn w-full max-w-md py-4 bg-slate-300 text-slate-500 font-bold text-2xl rounded-2xl flex items-center justify-center gap-2 transition cursor-not-allowed mt-2";
-            }
-        }
-
-        function confirmTopic() {
-            if (!tempTopic) return;
-            let displayTopic = tempTopic;
-            if (tempTopic === 'かんがえがかわったこと') displayTopic = 'かんがえが かわったこと';
-            if (tempTopic === 'もっとしりたいこと') displayTopic = 'もっと しりたいこと';
-
-            selectedTopic = displayTopic;
-            document.getElementById('input-class-tag').textContent = `1ねん${selectedClass}`;
-            document.getElementById('input-number-tag').textContent = `${studentNumber}ばん`;
-            document.getElementById('input-subject-tag').textContent = selectedSubject;
-            document.getElementById('input-topic-tag').textContent = selectedTopic;
-            goToPage(4);
+        function closeModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+            document.getElementById('custom-modal').classList.remove('flex');
         }
 
         // --- 音声認識 ---
@@ -704,8 +717,9 @@
                 }
                 if (transcript) {
                     const input = document.getElementById('text-input');
+                    // 漢字をすべてひらがな・わかち書きに変換
                     const convertedText = convertToHiragana(transcript);
-                    input.value += convertedText;
+                    input.value += (input.value ? ' ' : '') + convertedText;
                 }
             };
 
@@ -817,12 +831,22 @@
             goToPage(1);
         }
 
+        function deleteCard(id) {
+            let cards = JSON.parse(localStorage.getItem('furikaeri_cards') || '[]');
+            cards = cards.filter(c => c.id !== id);
+            localStorage.setItem('furikaeri_cards', JSON.stringify(cards));
+            loadCards();
+            if (currentPage === 'teacher') {
+                renderTeacherCards();
+            }
+        }
+
         // こどもよう きょうかフィルター切り替え
         function filterStudentSubject(subject) {
             activeStudentFilter = subject;
             speakText(subject === 'all' ? 'すべて' : subject);
 
-            ['all', 'こくご', 'さんすう', 'せいかつ', 'おんがく'].forEach(s => {
+            ['all', 'こくご', 'さんすう', 'せいかつ', 'おんがく', 'ずこう'].forEach(s => {
                 const tab = document.getElementById(`s-tab-${s}`);
                 if (!tab) return;
                 if (s === subject) {
@@ -833,6 +857,7 @@
                     if (s === 'さんすう') baseBg = "bg-sky-100 text-sky-800 border-sky-300";
                     if (s === 'せいかつ') baseBg = "bg-amber-100 text-amber-800 border-amber-300";
                     if (s === 'おんがく') baseBg = "bg-purple-100 text-purple-800 border-purple-300";
+                    if (s === 'ずこう') baseBg = "bg-orange-100 text-orange-800 border-orange-300";
                     tab.className = `action-btn px-3.5 py-2 rounded-2xl font-bold ${baseBg} border whitespace-nowrap opacity-80`;
                 }
             });
@@ -869,6 +894,7 @@
                 if (card.subject === 'さんすう') subjBg = "bg-sky-100 text-sky-800 border-sky-300";
                 if (card.subject === 'せいかつ') subjBg = "bg-amber-100 text-amber-800 border-amber-300";
                 if (card.subject === 'おんがく') subjBg = "bg-purple-100 text-purple-800 border-purple-300";
+                if (card.subject === 'ずこう') subjBg = "bg-orange-100 text-orange-800 border-orange-300";
 
                 const stampHTML = card.stamp 
                     ? `<div class="stamp-badge absolute top-3 right-3 bg-red-50 text-red-600 font-bold border-2 border-red-400 rounded-full px-3 py-1 text-sm shadow-sm flex items-center gap-1 transform rotate-[-6deg]">
@@ -905,7 +931,7 @@
         // --- せんせい がめんよう しょり ---
         function filterTeacherSubject(subject) {
             activeTeacherFilter = subject;
-            ['all', 'こくご', 'さんすう', 'せいかつ', 'おんがく'].forEach(s => {
+            ['all', 'こくご', 'さんすう', 'せいかつ', 'おんがく', 'ずこう'].forEach(s => {
                 const tab = document.getElementById(`t-tab-${s}`);
                 if (!tab) return;
                 if (s === subject) {
@@ -942,6 +968,7 @@
                 if (card.subject === 'さんすう') subjBg = "bg-sky-100 text-sky-800";
                 if (card.subject === 'せいかつ') subjBg = "bg-amber-100 text-amber-800";
                 if (card.subject === 'おんがく') subjBg = "bg-purple-100 text-purple-800";
+                if (card.subject === 'ずこう') subjBg = "bg-orange-100 text-orange-800";
 
                 cardEl.innerHTML = `
                     <div class="flex justify-between items-start">
@@ -953,18 +980,18 @@
                     </div>
 
                     <div class="font-bold text-emerald-900 text-base mt-1 flex items-center justify-between">
-                        <span>👤 ばんごう: <span class="text-slate-800">${escapeHTML(card.studentName || 'みせってい')}</span></span>
+                        <span>👤 児童: <span class="text-slate-800">${escapeHTML(card.studentName || 'みせってい')}</span></span>
                         ${card.stamp ? `<span class="text-xs bg-red-100 text-red-700 border border-red-300 px-2 py-0.5 rounded-full font-bold">${card.stamp}</span>` : ''}
                     </div>
 
                     <p class="text-lg font-bold text-slate-800 bg-slate-50 p-3 rounded-xl border border-slate-100 my-1 whitespace-pre-wrap">${escapeHTML(card.content)}</p>
 
                     <div class="flex justify-between items-center mt-2 pt-2 border-t border-slate-100">
-                        <button onclick="openStampModal(${card.id})" class="text-xs bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 shadow-sm">
+                        <button onclick="openStampModal(${card.id})" class="text-xs bg-amber-100 text-amber-800 font-bold px-3 py-1.5 rounded-full hover:bg-amber-200 flex items-center gap-1">
                             <i class="fa-solid fa-stamp"></i> スタンプを おくる
                         </button>
-                        <button onclick="deleteCard(${card.id}); renderTeacherCards();" class="text-xs text-rose-500 hover:underline">
-                            さくじょ
+                        <button onclick="deleteCard(${card.id})" class="text-xs text-rose-500 font-bold hover:underline">
+                            <i class="fa-solid fa-trash"></i> 削除
                         </button>
                     </div>
                 `;
@@ -972,22 +999,23 @@
             });
         }
 
+        // スタンプ関連機能
         function openStampModal(cardId) {
             selectedCardForStamp = cardId;
             document.getElementById('stamp-modal').classList.remove('hidden');
         }
 
         function closeStampModal() {
-            document.getElementById('stamp-modal').classList.add('hidden');
             selectedCardForStamp = null;
+            document.getElementById('stamp-modal').classList.add('hidden');
         }
 
         function setStamp(stampText) {
             if (!selectedCardForStamp) return;
-            const cards = JSON.parse(localStorage.getItem('furikaeri_cards') || '[]');
-            const index = cards.findIndex(c => c.id === selectedCardForStamp);
-            if (index !== -1) {
-                cards[index].stamp = stampText;
+            let cards = JSON.parse(localStorage.getItem('furikaeri_cards') || '[]');
+            const idx = cards.findIndex(c => c.id === selectedCardForStamp);
+            if (idx !== -1) {
+                cards[idx].stamp = stampText;
                 localStorage.setItem('furikaeri_cards', JSON.stringify(cards));
             }
             closeStampModal();
@@ -995,33 +1023,60 @@
             loadCards();
         }
 
-        function deleteCard(id) {
-            let cards = JSON.parse(localStorage.getItem('furikaeri_cards') || '[]');
-            cards = cards.filter(c => c.id !== id);
-            localStorage.setItem('furikaeri_cards', JSON.stringify(cards));
-            loadCards();
+        // Googleスプレッドシート用コピー（Tab区切りテキスト）
+        function copyForSpreadsheet() {
+            const cards = JSON.parse(localStorage.getItem('furikaeri_cards') || '[]');
+            if (cards.length === 0) {
+                showModal('⚠️', 'コピーするデータがありません');
+                return;
+            }
+
+            // TSV（Tab Separated Values）を作成（Googleスプレッドシートに直接貼り付け可能）
+            let tsvText = "日付\t教科\t児童名\tテーマ\t振り返り内容\tスタンプ\n";
+            cards.forEach(c => {
+                const cleanContent = c.content.replace(/\n/g, ' ');
+                tsvText += `${c.date}\t${c.subject}\t${c.studentName || ''}\t${c.topic}\t${cleanContent}\t${c.stamp || ''}\n`;
+            });
+
+            // クリップボードへコピー
+            const tempTextarea = document.createElement('textarea');
+            tempTextarea.value = tsvText;
+            document.body.appendChild(tempTextarea);
+            tempTextarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextarea);
+
+            showModal('📋', 'Googleスプレッドシート用に コピーしました！\nスプレッドシートで Ctrl+V (貼り付け) してください。');
         }
 
-        function showModal(icon, msg) {
-            document.getElementById('modal-icon').textContent = icon;
-            document.getElementById('modal-message').textContent = msg;
-            document.getElementById('custom-modal').classList.remove('hidden');
-        }
+        // CSVダウンロード
+        function downloadCSV() {
+            const cards = JSON.parse(localStorage.getItem('furikaeri_cards') || '[]');
+            if (cards.length === 0) {
+                showModal('⚠️', 'ダウンロードするデータがありません');
+                return;
+            }
 
-        function closeModal() {
-            document.getElementById('custom-modal').classList.add('hidden');
-        }
+            let csvContent = "\uFEFF"; // UTF-8 BOM
+            csvContent += "日付,児童名,教科,テーマ,振り返り内容,スタンプ\n";
 
-        function escapeHTML(str) {
-            return str.replace(/[&<>'"]/g, 
-                tag => ({
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;',
-                    "'": '&#39;',
-                    '"': '&quot;'
-                }[tag] || tag)
-            );
+            cards.forEach(c => {
+                const row = [
+                    `"${c.date}"`,
+                    `"${c.studentName || ''}"`,
+                    `"${c.subject}"`,
+                    `"${c.topic}"`,
+                    `"${c.content.replace(/"/g, '""')}"`,
+                    `"${c.stamp || ''}"`
+                ];
+                csvContent += row.join(",") + "\n";
+            });
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = `ふりかえりデータ_${new Date().toISOString().slice(0,10)}.csv`;
+            link.click();
         }
     </script>
 </body>
